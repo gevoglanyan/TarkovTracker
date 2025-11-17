@@ -1,3 +1,3 @@
 # Tarkov Tracker
 
-## Made by Harutyun Gevoglanyan
+## Made by Harutyun Gevoglanyan & John Semerjian
