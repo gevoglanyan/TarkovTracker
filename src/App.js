@@ -5,7 +5,7 @@ export default function App() {
   const tasksByTrader = {
     Therapist: [
       { name: "First in Line", requirements: " ", Level: 1 },
-      { name: "Shortage", requirements: "First in Line", Level: 1 },
+      { name: "Shortage", requirements: "First in Line", Level: 1, image:"Zavala.jpg"},
       { name: "Sanitary Standards - Part 1", requirements: "Shortage", Level: 4 },
     ],
     Prapor: [
@@ -17,7 +17,7 @@ export default function App() {
       { name: "BP Depot", requirements: "Delivery From the Past", Level: 5 },
       { name: "Belka and Strelka", requirements: "BP Depot", Level: 5 },
       { name: "Search Mission", requirements: "Debut", Level: 5 },
-      { name: "Shootout Picnic", requirements: "Background Check", Level: 3 },
+      { name: "Shootout Picnic", requirements: "Background Check", Level: 3, image:"Zavala.jpg"},
     ],
     Skier: [
       { name: "Burning Rubber", requirements: " ", Level: 1 },
@@ -152,6 +152,16 @@ export default function App() {
             <h3>{infoTask.name}</h3>
             <p><strong>Requirements:</strong> {infoTask.requirements || "None"}</p>
             <p><strong>Level:</strong> {infoTask.Level || "N/A"}</p>
+            {infoTask.image && (
+              <img
+                src={`/images/${infoTask.image}`}
+                alt={infoTask.name}
+                style={{ maxWidth: "50%", marginTop: "10px", borderRadius: "8px" }}
+              />
+            )}
+
+            <br />
+
             <button onClick={() => setInfoTask(null)}>Close</button>
           </div>
         </div>
