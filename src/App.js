@@ -83,6 +83,18 @@ export default function App() {
   const [openTraders, setOpenTraders] = useState({});
   const [infoTask, setInfoTask] = useState(null); 
 
+  let touchTimeout;
+
+  const handleTouchStart = (task) => {
+    touchTimeout = setTimeout(() => {
+      setInfoTask(task); 
+    }, 500);
+  };
+
+  const handleTouchEnd = () => {
+    clearTimeout(touchTimeout); 
+  };
+
   const toggleTask = (taskName) => {
     if (completed.includes(taskName)) {
       setCompleted(completed.filter((t) => t !== taskName));
@@ -104,30 +116,45 @@ export default function App() {
 
   return (
     <div className="app-wrapper">
-      <h1 className="title">Tarkov Tracker</h1>
+      <h1 className="title">Tarkov Quest Tracker</h1>
 
       <br />
 
-      <h2 className="subtitle">Left Click = Completed</h2>
-      <h2 className="subtitle">Right Click = More Information</h2>
+      <h2 className="subtitleWhite">
+        Left Click = <span className="subtitleGreen">Completed</span>
+      </h2>
+      <h2 className="subtitleWhite">
+        Right Click = <span className="subtitleGreen">More Information</span>
+      </h2>
 
+      <br />
+
+      <h2 className="subtitleWhite">
+        Note - <span className="subtitleGreen">On Mobile Hold Task</span>
+      </h2>
+  
       <br /> <br />
 
       <div className="tasks-container container">
         {Object.keys(tasksByTrader).map((trader) => (
           <div key={trader} className="trader-section">
             <h2 className="trader-title" onClick={() => toggleTrader(trader)}>
-              {trader} <span className="toggle-arrow">{openTraders[trader] ? "▼" : "▶"}</span>
+              {trader} <span className="toggle-arrow">{openTraders[trader] ? "-" : "+"}</span>
             </h2>
 
             {openTraders[trader] && (
               <div className="tasks-list">
+                <div className="level-range">
+                  Level Requirement: {Math.min(...tasksByTrader[trader].map(t => t.Level))} - {Math.max(...tasksByTrader[trader].map(t => t.Level))}
+                </div>
                 {tasksByTrader[trader].map((task) => (
                   <div
                     key={task.name}
                     className={`task-box ${completed.includes(task.name) ? "completed" : ""}`}
-                    onClick={() => toggleTask(task.name)}
+                    onClick={() => toggleTask(task.name)}        
                     onContextMenu={(e) => handleRightClick(e, task)} 
+                    onTouchStart={() => handleTouchStart(task)}
+                    onTouchEnd={handleTouchEnd}
                   >
                     <div className="task-header">
                       <div className="task-name">{task.name}</div>
@@ -140,6 +167,7 @@ export default function App() {
                     </div>
                   </div>
                 ))}
+
               </div>
             )}
           </div>
@@ -150,8 +178,11 @@ export default function App() {
         <div className="task-info-overlay" onClick={() => setInfoTask(null)}>
           <div className="task-info-box">
             <h3>{infoTask.name}</h3>
-            <p><strong>Requirements:</strong> {infoTask.requirements || "None"}</p>
-            <p><strong>Level:</strong> {infoTask.Level || "N/A"}</p>
+            <p><strong>Complete:</strong> {infoTask.requirements || "None"}</p>
+            <p><strong>Level Requirement:</strong> {infoTask.Level || "N/A"}</p>
+
+            <br />
+
             {infoTask.image && (
               <img
                 src={`/images/${infoTask.image}`}
@@ -160,7 +191,9 @@ export default function App() {
               />
             )}
 
-            <br />
+            <br /> <br />
+
+            <p><strong>Objective:</strong></p>
 
             <button onClick={() => setInfoTask(null)}>Close</button>
           </div>
@@ -174,6 +207,16 @@ export default function App() {
           <span className="progress-count">{completed.length}</span> / <span className="progress-total">{totalTasks}</span> Tasks Completed
         </div>
       </div>
+
+      <br /> <br />
+
+      <h1 className="footer">
+        Website Created by&nbsp; 
+        <a href="https://gevoglanyan.com" target="_blank" rel="noopener noreferrer">
+          Harutyun Gevoglanyan
+        </a>
+      </h1>
+
     </div>
   );
 }
