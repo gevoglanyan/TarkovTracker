@@ -176,7 +176,7 @@ export default function App() {
 
       {infoTask && (
         <div className="task-info-overlay" onClick={() => setInfoTask(null)}>
-          <div className="task-info-box">
+          <div className="task-info-box" onClick={(e) => e.stopPropagation()}>
             <h3>{infoTask.name}</h3>
             <p><strong>Complete:</strong> {infoTask.requirements || "None"}</p>
             <p><strong>Level Requirement:</strong> {infoTask.Level || "N/A"}</p>
