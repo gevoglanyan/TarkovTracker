@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["src/styles/*"], // Alias for components within src
+      "@views/*": ["src/views/*"],         // Alias for utilities within src
+      "@components/*": ["src/components/*"],
+      "@reducers/*":  ["src/reducers/*"],
+      "@navigation/*": ["src/components/navigation/*"]
+    }
+  },
+  "include": ["src"]
+}

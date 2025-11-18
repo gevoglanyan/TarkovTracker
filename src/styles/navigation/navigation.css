@@ -1,0 +1,46 @@
+.navigation{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 80px;
+    background-color: lightgray;
+    color: #000000;
+}
+
+.navigation-wrapper{
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.navigation-logo{
+    display: flex;
+    width: 30%;
+    height: 100%;
+    background-color: green;
+}
+
+.navigation-links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 70%;
+    height: 100%;
+    padding-left: 5%;
+    color: #000000;
+    background-color: darkgray;
+}
+
+.navigation-links-list{
+    display: flex;
+}
+
+.navigation-link{
+    min-width: 10%;
+    padding: 5px;
+    margin: 5px;
+}
+
+ul{
+    list-style-type: none;
+}
