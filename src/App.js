@@ -269,7 +269,8 @@ export default function App() {
       notes 
     };
     localStorage.setItem("tarkovTrackerProfiles", JSON.stringify(updatedProfiles));
-  }, [completed, notes, activeProfile]); // Removed profiles from dependencies to avoid infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [completed, notes, activeProfile]); // Intentionally excluding profiles to avoid infinite loop
 
   // Update profiles state only when switching profiles
   useEffect(() => {
