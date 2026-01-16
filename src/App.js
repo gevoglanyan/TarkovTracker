@@ -260,6 +260,7 @@ export default function App() {
   const [showProfileManager, setShowProfileManager] = useState(false);
   const [editingNote, setEditingNote] = useState(null);
 
+  // Fixed: Save current profile data to localStorage whenever completed or notes change
   useEffect(() => {
     const updatedProfiles = [...profiles];
     updatedProfiles[activeProfile] = { 
@@ -267,10 +268,10 @@ export default function App() {
       completed, 
       notes 
     };
-    setProfiles(updatedProfiles);
     localStorage.setItem("tarkovTrackerProfiles", JSON.stringify(updatedProfiles));
-  }, [completed, notes]);
+  }, [completed, notes, activeProfile]); // Removed profiles from dependencies to avoid infinite loop
 
+  // Update profiles state only when switching profiles
   useEffect(() => {
     localStorage.setItem("tarkovTrackerActiveProfile", activeProfile.toString());
     setCompleted(profiles[activeProfile]?.completed || []);
